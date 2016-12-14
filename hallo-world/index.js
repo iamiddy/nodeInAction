@@ -8,7 +8,7 @@ const port = 3000
 
 //Middlewares in express
 app.use((request, response, next) => {
-  console.log(request.headers)
+  //console.log(request.headers)
   next()
 })
 
@@ -21,6 +21,19 @@ app.get('/', (request, response) => {
    response.json({
        chance: request.chance
    })
+})
+
+
+// error handling
+app.get('/error', (request, response) => {
+    throw new Error('oops')
+})
+
+app.use((err,request,response, next) => {
+    console.log(err)
+    response.status(500).json({
+        error: 'something broke'
+    })
 })
 
 
