@@ -2,6 +2,9 @@
   "name": "hallo-world",
   "version": "1.0.0",
   "description": "Hallo World Application!",
+  "repository": {
+    "url": "https://github.com/iamiddy/nodeInAction.git" 
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
