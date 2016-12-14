@@ -2,9 +2,13 @@
 
 //require('./app/index');
 const express = require('express')
+const bodyParser = require('body-parser');
 const app = express()
+app.use(bodyParser.json());
 
 const port = 3000
+
+const users = []
 
 //Middlewares in express
 app.use((request, response, next) => {
@@ -27,6 +31,21 @@ app.get('/', (request, response) => {
 // error handling
 app.get('/error', (request, response) => {
     throw new Error('oops')
+})
+
+app.post('/users', (request,response) =>{
+    // retrieve user posted data from the body
+    const user = request.body
+
+    users.push(user)
+   
+    response.status(201).json({
+        message: 'User created successfully'
+    })
+})
+
+app.get('/users', (req,res) => {
+    res.json(users)
 })
 
 app.use((err,request,response, next) => {
