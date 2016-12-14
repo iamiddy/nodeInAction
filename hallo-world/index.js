@@ -1,10 +1,11 @@
 // index.js
 
 //require('./app/index');
-const express = require('express')
-const bodyParser = require('body-parser');
+const express = require('express') // un-opinionsted web framework
+const bodyParser = require('body-parser'); // json response body
+const rp = require('request-promise') // remote APIs invocation
 const app = express()
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // json responses.
 
 const port = 3000
 
@@ -48,6 +49,26 @@ app.get('/users', (req,res) => {
     res.json(users)
 })
 
+app.get('/weather/:city', (request, response) => {
+    rp({
+        uri: 'http://apidev.accuweather.com/locations/v1/search',
+        qs: {
+            q: request.params.city,
+            apiKey: 'e0OMpjurmmhZfGhvAuBeIBAUpWX2EP7I' // use own wheather channel key
+        },
+        json: true,
+    })
+    .then((data) => {
+        response.json(data)
+    })
+    .catch((err) => {
+        console.log(err)
+        response.json({
+            "error" : err
+        })
+    })
+})
+
 app.use((err,request,response, next) => {
     console.log(err)
     response.status(500).json({
@@ -60,7 +81,6 @@ app.listen(port, (err) => {
     if (err) {
         return console.log('something bad happened', err)
     }
-
     console.log(`server is listening on ${port}`)
 })
 
