@@ -3,9 +3,12 @@
 const express = require('express') // un-opinionsted web framework
 const bodyParser = require('body-parser'); // json response body
 const app = express();
+
+// configure the app to use bodyParser()
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 app.use(bodyParser.json()); // json responses.
 
 const port = 3000;
