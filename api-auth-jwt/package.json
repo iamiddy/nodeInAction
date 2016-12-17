@@ -1,0 +1,33 @@
+{
+  "name": "api-auth-jwt",
+  "version": "1.0.0",
+  "description": "Rest API Authentication and Authorization with Json Web Tokens",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamiddy/nodeInAction.git"
+  },
+  "keywords": [
+    "Authentication",
+    "Authoriation",
+    "APIS",
+    "Json",
+    "Web",
+    "Tokens",
+    "JWT"
+  ],
+  "author": "Iddy Magohe",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.2.1",
+    "lodash": "^4.17.2",
+    "mongoose": "^4.7.3",
+    "morgan": "^1.7.0"
+  }
+}

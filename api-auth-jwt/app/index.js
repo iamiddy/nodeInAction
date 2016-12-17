@@ -1,0 +1,1 @@
+// app/indes.js
