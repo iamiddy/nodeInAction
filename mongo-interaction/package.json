@@ -1,0 +1,26 @@
+{
+  "name": "mongo-interaction",
+  "version": "1.0.0",
+  "description": "Mongoose interaction with MongoDB learning",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamiddy/nodeInAction.git"
+  },
+  "keywords": [
+    "MongoDB"
+  ],
+  "author": "Iddy Magohe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamiddy/nodeInAction/issues"
+  },
+  "homepage": "https://github.com/iamiddy/nodeInAction#readme",
+  "dependencies": {
+    "mongoose": "^4.7.3"
+  }
+}
