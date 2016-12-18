@@ -36,6 +36,22 @@ userSchema.methods.dudify = function() {
     this.name = this.name + '-dude';
 };
 
+// on every save, add the Date
+userSchema.pre('save', function(next){
+    // get the current Date
+    var currentDate = new Date();
+
+    // change the updated_at field to current Date
+    this.update_at = currentDate;
+
+    // if created_at doesn't exist, add to that field
+    if (!this.created_at) 
+        this.created_at = currentDate;
+
+        next();
+
+});
+
 // Schema is useless so far
 // need to create model using it
 var User = mongoose.model('User',userSchema);
