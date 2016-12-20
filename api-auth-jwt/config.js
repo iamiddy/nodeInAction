@@ -1,7 +1,7 @@
 // config.exports
 module.exports = {
-    'secret': 'some password',
-    'database':'someurl'
+    'secret': 'someverysecretkey',
+    'databaseUrl': 'mongodb://nodeuser:nodepwd@localhost:27017/node-users'
 };
 
 // secret: used when we create and verify JSON Web Tokens
