@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //Middlewares in express
-app.use((request, response, next) => {
+app.use((req, response, next) => {
   //console.log(request.headers)
   next()
 })
