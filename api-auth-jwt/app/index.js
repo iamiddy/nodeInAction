@@ -69,7 +69,44 @@ apiRouter.post('/authenticate', function(req,res){
 
 });
 
+// route middleware to verify a token
+apiRouter.use(function accessCheck(req,res, next){
+    //check header for token
+    var token = req.headers['user-token'];
+
+    if (token){
+        nJwt.verify(token,config.secret, function(err, verifiedJwt){
+            if(err) {
+                console.log(err); // Token has expired, has been tampered with etc
+                res.status(401).json({
+                    success: false,
+                    message: 'Failed to authenticate token'
+                });
+            }else{
+                console.log(verifiedJwt) // will contain the header and body
+               
+                
+                // if everything is good, save to request for use in other routes
+                req.verifiedJwt = verifiedJwt;
+                next();
+
+            }
+        })
+    }else {
+        // if there is no token
+        // return an error
+        return res.status(403).json({
+            success: false,
+            message: 'No token provided'
+        })
+    }
+
+});
+
 apiRouter.get('/users', function(req, res){
+    console.log("verified token");
+    console.log(req.verifiedJwt.body);
+    
     User.find({}, function(err, users){
         if (err) throw err
         res.json(users);
