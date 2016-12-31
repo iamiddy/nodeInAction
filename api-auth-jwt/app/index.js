@@ -6,6 +6,7 @@ var User = require('../models/user');
 var nJwt = require('njwt'); // used to create, sign and verify tokens
 var secureRandom = require('secure-random');
 var config = require('../config'); // get config file
+var jwtUtil = require('./jwtUtil');
 
 //
 //var signingKey = secureRandom(256, {type: 'Buffer'}); // Create a highly random byte array of 256 bytes
@@ -98,14 +99,14 @@ apiRouter.use(function accessCheck(req,res, next){
         return res.status(403).json({
             success: false,
             message: 'No token provided'
-        })
+        });
     }
 
 });
 
 apiRouter.get('/users', function(req, res){
     console.log("verified token");
-    console.log(req.verifiedJwt.body);
+    console.log(jwtUtil.getSubject(req.verifiedJwt));
     
     User.find({}, function(err, users){
         if (err) throw err
