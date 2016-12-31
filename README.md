@@ -9,3 +9,4 @@
  - [Where to store JWT Cookies vs HTML5 storage](https://stormpath.com/blog/where-to-store-your-jwts-cookies-vs-html5-web-storage)
  - [Choosing Node Authentication Strategy] (https://stormpath.com/blog/choosing-nodejs-authentication-strategy)
  - [Node JWS Create And Verify] (https://stormpath.com/blog/nodejs-jwt-create-verify)
+ - [Coding Style] (https://github.com/RisingStack/node-style-guide) and [#2](https://github.com/airbnb/javascript)
