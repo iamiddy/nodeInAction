@@ -12,3 +12,4 @@
  - [Coding Style] (https://github.com/RisingStack/node-style-guide) and [#2](https://github.com/airbnb/javascript)
  - [Fundamental & Patterns] (https://blog.risingstack.com/fundamental-node-js-design-patterns/)
  - [byCript] (https://github.com/shaneGirish/bcrypt-nodejs) 
+ - [njwt](https://github.com/jwtk/njwt)
