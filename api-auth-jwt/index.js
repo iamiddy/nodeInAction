@@ -8,7 +8,7 @@ var app = express();
 
 var morgan = require('morgan');
 
-var jwt = require('jsonwebtoken') // used to create, sign and verify tokens
+var jwt = require('jsonwebtoken') // used to create, sign and verify tokensÒ
 var config = require('./config'); // get config file
 var User = require('./models/user'); // get our mongoose model
 
@@ -24,8 +24,8 @@ app.use(bodyParser.json());
 
 //Middlewares in express
 app.use((req, response, next) => {
-  //console.log(request.headers)
-  next()
+    //console.log(request.headers)
+    next()
 })
 
 // use morgan to log requests to the console
@@ -41,8 +41,8 @@ app.get("/", (req, res) => {
 });
 
 
-app.get('/setup', (req,res) => {
-    
+app.get('/setup', (req, res) => {
+
     // create a sample user
     var nick = new User({
         name: 'Nick Cerminara',
@@ -52,7 +52,7 @@ app.get('/setup', (req,res) => {
     });
 
     // save sample user
-    nick.save(function(err) {
+    nick.save(function (err) {
         if (err) throw err
         console.log('User Saved Succesfully')
         res.json({success: true});
@@ -75,9 +75,9 @@ app.use((err,req, res, next) => {
 
 //start server
 app.listen(port, err => {
-    if (err) 
+    if (err)
           return console.log('There was an issue  in starting the server :' + err);
-     console.log('Magic happens at http://localhost:' + port);     
+     console.log('Magic happens at http://localhost:' + port);
 
 });
 

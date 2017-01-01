@@ -21,40 +21,40 @@ apiRouter.get('/', function (req, res) {
 });
 
 // route to authenticate a user (POST /api/authenticate)
-apiRouter.post('/authenticate', function(req,res){
+apiRouter.post('/authenticate', function (req, res) {
     // find the user
     User.findOne({
         username: req.body.userName
-    }, function(err, user){
+    }, function (err, user) {
         if (err) throw err;
 
-        if (!user){
+        if (!user) {
             res.status(401).json({
                 success: false,
                 message: 'Authentication failed. User not found'
             });
-        }else if (user){
+        } else if (user) {
             // check if password matches
-            if (user.password != req.body.password){
+            if (user.password != req.body.password) {
                 res.status(401).json({
-                    success : false,
+                    success: false,
                     message: 'Authentication failed. Wrong password'
                 });
-            }else {
+            } else {
                 // if user is found and password is right
-                 var claims = {
+                var claims = {
                     iss: "http://myapp.com/",  // The URL of your service
                     sub: user.username,    // The UID of the user in your system
                     scope: "self, admins" // change these accordingly
-                    }
+                }
 
-                 // create a token
-                    var jwt = nJwt.create(claims, config.secret);
-                    jwt.setExpiration(new Date().getTime() + (60*60*1000)); // One hour from now
-                    //console.log(jwt);
+                // create a token
+                var jwt = nJwt.create(claims, config.secret);
+                jwt.setExpiration(new Date().getTime() + (60 * 60 * 1000)); // One hour from now
+                //console.log(jwt);
 
                 var token = jwt.compact();
-                    //console.log(token);
+                //console.log(token);
 
                 // return the information including token as JSON
                 res.json({
@@ -71,29 +71,29 @@ apiRouter.post('/authenticate', function(req,res){
 });
 
 // route middleware to verify a token
-apiRouter.use(function accessCheck(req,res, next){
+apiRouter.use(function accessCheck(req, res, next) {
     //check header for token
     var token = req.headers['user-token'];
 
-    if (token){
-        nJwt.verify(token,config.secret, function(err, verifiedJwt){
-            if(err) {
+    if (token) {
+        nJwt.verify(token, config.secret, function (err, verifiedJwt) {
+            if (err) {
                 console.log(err); // Token has expired, has been tampered with etc
                 res.status(401).json({
                     success: false,
                     message: 'Failed to authenticate token'
                 });
-            }else{
+            } else {
                 console.log(verifiedJwt) // will contain the header and body
-               
-                
+
+
                 // if everything is good, save to request for use in other routes
                 req.verifiedJwt = verifiedJwt;
                 next();
 
             }
         })
-    }else {
+    } else {
         // if there is no token
         // return an error
         return res.status(403).json({
@@ -104,11 +104,11 @@ apiRouter.use(function accessCheck(req,res, next){
 
 });
 
-apiRouter.get('/users', function(req, res){
+apiRouter.get('/users', function (req, res) {
     console.log("verified token");
     console.log(jwtUtil.getSubject(req.verifiedJwt));
-    
-    User.find({}, function(err, users){
+
+    User.find({}, function (err, users) {
         if (err) throw err
         res.json(users);
     });
