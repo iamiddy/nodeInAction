@@ -1,10 +1,10 @@
 // models/user.js
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var userSchema = mongoose.Schema;
+let userSchema = mongoose.Schema;
 
 // create a Schema
-var userSchema = new userSchema({
+userSchema = new userSchema({
     name: String,
     username: {type: String, required: true, unique: true},
     password: {type: String, required: true},
@@ -19,15 +19,17 @@ var userSchema = new userSchema({
 });
 
 // on every save, add the Date
-userSchema.pre('save', function(next){
+userSchema.pre('save', function (next) {
     // get the current Date
-    var currentDate = new Date();
+    const currentDate = new Date();
     // change the updated_at field to current Date
     this.update_at = currentDate;
     // if created_at doesn't exist, add to that field
-    if (!this.created_at) 
+    if (!this.created_at){
         this.created_at = currentDate;
-         next();
+    }
+
+    next();
 });
 
 module.exports = mongoose.model('User', userSchema);

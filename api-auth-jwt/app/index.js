@@ -1,12 +1,12 @@
 // app/indes.js
-var express = require('express');
-var apiRouter = express.Router();
-var url = require('url');
-var User = require('../models/user');
-var nJwt = require('njwt'); // used to create, sign and verify tokens
-var secureRandom = require('secure-random');
-var config = require('../config'); // get config file
-var jwtUtil = require('./jwtUtil');
+const express = require('express');
+const apiRouter = express.Router();
+const url = require('url');
+const User = require('../models/user');
+const nJwt = require('njwt'); // used to create, sign and verify tokens
+const secureRandom = require('secure-random');
+const config = require('../config'); // get config file
+const jwtUtil = require('./jwtUtil');
 
 //
 //var signingKey = secureRandom(256, {type: 'Buffer'}); // Create a highly random byte array of 256 bytes
@@ -42,18 +42,18 @@ apiRouter.post('/authenticate', function (req, res) {
                 });
             } else {
                 // if user is found and password is right
-                var claims = {
+                const claims = {
                     iss: "http://myapp.com/",  // The URL of your service
                     sub: user.username,    // The UID of the user in your system
                     scope: "self, admins" // change these accordingly
-                }
+                };
 
                 // create a token
-                var jwt = nJwt.create(claims, config.secret);
+                const jwt = nJwt.create(claims, config.secret);
                 jwt.setExpiration(new Date().getTime() + (60 * 60 * 1000)); // One hour from now
                 //console.log(jwt);
 
-                var token = jwt.compact();
+                const token = jwt.compact();
                 //console.log(token);
 
                 // return the information including token as JSON
@@ -73,7 +73,7 @@ apiRouter.post('/authenticate', function (req, res) {
 // route middleware to verify a token
 apiRouter.use(function accessCheck(req, res, next) {
     //check header for token
-    var token = req.headers['user-token'];
+    const token = req.headers['user-token'];
 
     if (token) {
         nJwt.verify(token, config.secret, function (err, verifiedJwt) {
